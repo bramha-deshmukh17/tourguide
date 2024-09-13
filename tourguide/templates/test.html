@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+</head>
+<body>
+    <h2>Upload a File</h2>
+    <form action="/view" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <input type="file" name="file" accept="image/*"> <!-- Accepts only image files -->
+        <button type="submit">Upload</button>
+    </form>
+    <div class="container">
+        <div class="box" id="box1" style="background-color: #000;">Light background</div>
+        <div class="box" id="box2" style="background-color: #333333;">Dark background</div>
+      </div>
+      
+    <img src="https://tourguidedemo.blob.core.windows.net/tourguide/download.jpeg?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-02-14T22:36:26Z&st=2024-02-14T14:36:26Z&sip=58.84.61.221&spr=https&sig=MAd3Wd01cdZke1drlnXFRHDaWQPfJx0F3eUiTEu76cU%3D" />
+</body>
+<script>
+    function invertTextColor(bgColor) {
+        // Convert hex color to RGB
+        var hex = bgColor.substring(1);
+        var r = parseInt(hex.substring(0, 2), 16);
+        var g = parseInt(hex.substring(2, 4), 16);
+        var b = parseInt(hex.substring(4, 6), 16);
+      
+        // Calculate luminance
+        var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+        // Return white or black depending on luminance
+        return luminance > 0.5 ? '#000000' : '#ffffff';
+      }
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get all elements with class 'box'
+        var boxes = document.querySelectorAll('.box');
+        
+        // Loop through each box
+        boxes.forEach(function(box) {
+          // Get the background color of the box
+          var bgColor = window.getComputedStyle(box).getPropertyValue('background-color');
+          
+          // Set the text color to the inverted color
+          box.style.color = invertTextColor(bgColor);
+        });
+      });
+      
+</script>
+</html>

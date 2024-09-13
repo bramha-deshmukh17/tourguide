@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/a0a54ad092.js" crossorigin="anonymous"></script>
+    <style> 
+
+      .row a{
+        text-decoration:none;
+        color:#000;
+      }
+
+      ::-webkit-scrollbar {
+        width: 7px; 
+        height: 7px !important; /* width & height of the scrollbar */
+      }
+      
+      ::-webkit-scrollbar-track {
+        background-color: #333; /* color of the track */
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: #666; /* color of the thumb */
+        border-radius: 5px; /* roundness of the thumb */
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #888; /* color of the thumb on hover */
+      }
+      .dropdown-menu{
+        min-width: 120px;
+        text-align: center;
+      }
+      .shadow-lg:hover{
+        cursor:pointer;
+      }
+        {% block css %} {% endblock %}
+      
+    </style>
+</head>
+
+<body class="bg-dark" style="max-width:100vw;overflow:hidden">
+    <nav class="navbar navbar-expand-md navbar-dark position-sticky sticky-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin/home/">TourGuide</a>
+            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/viewtourguide/">View Guides</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/admin/hotel/">Hotel</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/admin/restaurant/">Restaurant</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/admin/places/">Places</a>
+                    </li>
+                </ul>
+                <form class="d-flex me-4">
+                    <div class="input-group">
+                        <div class="dropdown me-3">
+                          <button class="btn btn-light text-dark rounded" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i> &nbsp;{{user_name|title}}</button> 
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-bold" href="/logout/">Logout</a></li>
+                          </ul>
+                        </div>
+        
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-dark container-fluid p-5 mt-5 text-center">
+      <div class="row justify-content-center" style="justify-content:space-even">
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="p-5 m-3 text-dark">
+              <h2><a href="/admin/hotel/">Hotels</a></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="p-5 m-3 text-dark">
+              <h2><a href="/admin/restaurant/">Restaurants</a></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="p-5 m-3 text-dark">
+              <h2><a href="/admin/places/">Tourist Places</a></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="p-5 m-3 text-dark">
+              <h2><a href="/admin/viewtourguide/">Guides</a></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-center mb-0 container-fluid text-white m-5 p-5">
+        
+          <br><br><br>
+          <section class="text-light text-center h4 mb-0 pb-0">&copy; 2024 Copyright: TourGuide.com </section>
+        </div>
+      </footer>
+
+<script>{% block script %} {% endblock %}</script>
+
+</body>
+
+</html>

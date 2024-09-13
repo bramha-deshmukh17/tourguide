@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Details {% endblock %}
+    {% block css %}
+
+      
+    /* card*/
+    .card {
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 5/3;
+    }
+
+    .card-block {
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    .card-title a{
+        text-decoration:none;
+        color: #000 !important;
+    }
+    .card-title:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }   
+
+    {% endblock %}
+
+
+    {% block action%} action='/{{type}}s/search/'{%endblock%}
+
+    {% block body %}
+    
+    <div class="container">
+        <div class="row text-light p-3">
+            <!--MAin info-->
+            <div> <h3 style="display: inline;">{{data.name}}</h3></div>
+            <p><i class="fa-solid fa-location-dot"></i>&nbsp;{{data.area}}, {{data.city}}</p>
+            <img class="img-fluid"  style="width:100%;max-width:400px;max-height:300px;" src="/media/{{data.img}}" /><br><br>
+            <div class="pt-5 pb-5">
+                <h3>Description</h3>
+                <p class="text-justify">{{data.description}}</p>
+            </div>
+            <div class="pb-5">
+                {% if type == 'hotel' %} 
+                    <h3>Amenities</h3>
+                    {% for key,value in data.amenities.items %}
+                        {% if value %}{{key|title}}, {% endif %}
+                    {% endfor %}  
+                    {% if not amenities %}
+                        <h3>&nbsp;N.A.</h3>
+                    {% endif %}
+                {% endif %} 
+            </div>
+            <iframe src="{{data.location}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
+        </div>
+    </div>
+    <!--nearby info-->
+    {% if nearby%}
+    <div class="container">
+        <div class="row p-3">
+            <h2 class="text-light">Other {{type}}s nearby</h2>
+            {% for i in nearby %}
+            <div class="col-sm-4">
+                <div class="card card-block">
+                    <img src="/media/{{i.img}}" alt="Nature" class="img-fluid" />
+                    <h4 class="card-title text-truncate pt-3"><a href="/{{type}}s/details/?id={{i.rid}}" style="margin-left:0;padding-left:0;">{{i.name}}</a></h4>
+                    
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <!--other in city info-->
+    {% if extra%}
+    <div class="container">
+        <div class="row p-3">
+            <h2 class="text-light">Other {{type}}s in City</h2>
+            {% for i in extra %}
+            <div class="col-sm-4">
+                <div class="card card-block">
+                    <img src="/media/{{i.img}}" alt="Nature" class="img-fluid" />
+                    <h4 class="card-title text-truncate pt-3"><a href="/{{type}}s/details/?id={{i.rid}}" style="margin-left:0;padding-left:0;">{{i.name}}</a></h4>
+                    
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <!--guide info-->
+    {% if guide%}
+    <div class="container">
+        <div class="row p-3">
+            <h2 class="text-light">Guides</h2>
+            {% for i in guide %}
+            <div class="col-sm-4">
+                <div class="card card-block">
+                    <img src="/media/{{i.img}}" alt="Nature" class="img-fluid" />
+                    <div class="row">
+                        <h4 class="card-title text-truncate pt-3"><a href="/tourguide/details/?id={{i.tid}}" style="margin-left:0;padding-left:0;">{{i.name}}</a></h4><br>
+                        <p class="card-title text-truncate"> &#9733; {{i.rating}} </p>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% endblock %}

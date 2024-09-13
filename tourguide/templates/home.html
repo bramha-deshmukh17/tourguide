@@ -1,0 +1,149 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Home Page {% endblock %}
+{% block css %}
+
+      .bg-img {
+        background-image: url("{% static './img/bg3.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        width: 100%; /* Or any other width you desire */
+        height: auto;
+      }
+  
+      section a {
+        text-decoration: none;
+      }
+  
+      section a:hover {
+        text-decoration: underline;
+      }
+  
+      img{
+        aspect-ratio: 3/2;
+      }
+  
+      .image-container {
+        position: relative;
+      }
+  
+      .image {
+        opacity: 1;
+        display: block;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        border-radius: 10px 10px 0 0;
+      }
+  
+      .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 0.5em;
+      }
+  
+      .image-container:hover .image {
+        opacity: 0.3;
+      }
+  
+      .image-container:hover .middle {
+        opacity: 0.7;
+      }
+  
+      .text {
+        background-color: #000;
+        color: white;
+        font-size: 16px;
+        padding: 1rem 2rem;
+        border-radius: 7px;
+      }
+      .middle a{
+        color: #fff;
+        text-decoration: none;
+      }
+      .middle a:hover{
+        text-decoration: underline;
+      }
+      
+{% endblock %}
+{% block search%}style='display:none'{%endblock%}
+{% block searchbtn%}style='display:none'{%endblock%}
+
+{% block body %}
+    <div class="bg-dark">
+      <div class="container-fluid text-light text-center p-3 bg-img">
+        <div class="h1">Popular cities</div>
+        <div class="container">
+          <div class="row p-3">
+            <div class="col-md-3">
+              <div class="image-container">
+                <img class="image" src="{% static './img/mahabaleshwar.jpg' %}" width="100%" height="70%">
+                <div class="middle">
+                  <div class="text text-center">
+                    <a href="/restaurants/?city=mahabaleshwar">Restaurants</a>
+                    <a href="/hotels/?city=mahabaleshwar">Hotels</a>
+                    <a href="/places/?city=mahabaleshwar">Places</a>
+                  </div>
+                </div>
+              </div>
+              <p class="bg-dark h4 p-1 rounded-bottom">Mahabaleshwar</p>
+            </div>
+            <div class="col-md-3">
+              <div class="image-container">
+                <img class="image" src="{% static './img/lonavala.jpg' %}" width="100%" height="70%">
+                <div class="middle">
+                  <div class="text text-center">
+                    <a href="/restaurants/?city=lonavala">Restaurants</a>
+                    <a href="/hotels/?city=lonavala">Hotels</a>
+                    <a href="/places/?city=lonavala">Places</a>
+                  </div>
+                </div>
+              </div>
+              <p class="bg-dark h4 p-1 rounded-bottom">Lonavala</p>
+            </div>
+            <div class="col-md-3">
+              
+              <div class="image-container">
+                <img class="image" src="{% static './img/matheran.jpg' %}" width="100%" height="70%">
+                <div class="middle">
+                  <div class="text text-center">
+                    <a href="/restaurants/?city=matheran">Restaurants</a>
+                    <a href="/hotels/?city=matheran">Hotels</a>
+                    <a href="/places/?city=matheran">Places</a>
+                  </div>
+                </div>
+              </div>
+              <p class="bg-dark h4 p-1 rounded-bottom">Matheran</p>
+            </div>
+            <div class="col-md-3">
+              
+              <div class="image-container">
+                <img class="image" src="{% static './img/shegaon.jpg' %}" width="100%" height="70%">
+                <div class="middle">
+                  <div class="text text-center">
+                    <a href="/restaurants/?city=shegaon">Restaurants</a>
+                    <a href="/hotels/?city=shegaon">Hotels</a>
+                    <a href="/places/?city=shegaon">Places</a>
+                  </div>
+                </div>
+              </div>
+              <p class="bg-dark h4 p-1 rounded-bottom">Shegaon</p>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block script %} {% endblock %}
+
+
+

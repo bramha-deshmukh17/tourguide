@@ -1,0 +1,74 @@
+{% extends 'tbase.html' %} 
+{% load static %}
+{% block title %}Contact Us {% endblock %}
+{% block css %}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.search{
+    display:none !important;
+  }
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1, h2, h3 {
+    color: #333;
+}
+.contact-info {
+    margin-bottom: 20px;
+}
+.contact-form {
+    margin-bottom: 20px;
+}
+.social-links a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #1a73e8;
+}
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+h2,h1{
+    color: #fff;
+}
+      
+{% endblock %}
+
+{% block body %}
+<div class="container text-light">
+    <h1>Contact Us</h1>
+    <p>We're here to help! Whether you have a question about our services, need assistance, or just want to provide feedback, we're all ears. Reach out to us and we'll respond as soon as we can.</p><hr>
+
+    <h2>Get in Touch</h2>
+    <div class="contact-info">
+        <p><strong>Phone:</strong><br>For immediate assistance, give us a call at <strong>1122334455</strong>. Our customer service team is available from 9 AM to 5 PM, Monday to Friday.</p>
+        <p><strong>Email:</strong><br>Prefer to write Email us at <strong> <a href="mailto:your_mail">yourmail.com</a></strong>. We strive to respond to all emails within 24 hours.</p>
+        <p><strong>Address:</strong><br>Want to visit? Find us at:<br>Rushikesh Complex Bhelke Nagar KOthrud, PUNE - 411038 </p>
+    </div><hr>
+
+    <h2>Map and Directions</h2>
+    <div class="map">
+        <p>Find us easily with the map below:</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220.46455204263225!2d73.80994440634505!3d18.503126072623655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf93c7ede5eb%3A0xf3bc4990ed42d618!2sRushikesh%20Apartments!5e1!3m2!1sen!2sin!4v1716360667316!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div><br><hr>
+
+    <h2>Feedback</h2>
+    <p>We value your feedback and suggestions. Let us know how we can improve our services.</p>
+    <br><hr>
+
+    <h2>Thank You!</h2>
+    <p>Thank you for visiting our contact page. We look forward to hearing from you!</p>
+</div>
+
+{% endblock %}
+
+{% block script %} {% endblock %}
+
+
+

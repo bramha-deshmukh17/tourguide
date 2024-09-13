@@ -1,0 +1,293 @@
+{% extends 'tbase.html' %}
+{% load static %}
+
+{% block title %} Profile {% endblock %}
+{% block css %}
+.rounded-end::placeholder{
+    color: #fff !important;
+}
+
+.search{
+  display:none !important;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.rounded-image {
+  border-radius: 50%;
+  width: 200px; /* Adjust size as needed */
+  height: 180px; /* Adjust size as needed */
+}
+
+.edit-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #fff;
+  cursor: pointer;
+  
+}
+
+.edit-icon i {
+  font-size: 20px;
+}
+{% endblock %}
+ 
+{% block body %}
+
+<br><br>
+<br><br>
+<div class="container p-5 rounded border shadow-lg bg-dark">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text-light col-6">Personal Details<button type="button" class="btn text-light shadow-none" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa-solid fa-pen-to-square" title="Edit your Details"></i></button></h4><br>
+        <div class="image-container">
+          <div class="edit-icon">
+            <button type="button" class="btn text-light shadow-none" data-bs-toggle="modal" data-bs-target="#photo"><i class="fa-solid fa-pen-to-square" title="update Photo"></i></button>
+          </div>
+          <img src="/media/{{guide.img}}" alt="User Image" class="rounded-image">
+        </div><br><br>
+        <div class="input-group row">
+          <span class="input-group-text col-3">Name</span>
+          <input class="form-control shadow-none rounded-end" type="text" value="{{guide.name}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Mobile</span>
+          <input class="form-control shadow-none rounded-end" type="text" value="{{guide.mobile}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">E-mail</span>
+          <input class="form-control shadow-none rounded-end" type="text" value="{{guide.email}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+            <span class="input-group-text col-3">Experience</span>
+            <input class="form-control shadow-none rounded-end" type="text" value="{{guide.experience}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+            <span class="input-group-text col-3">Area</span>
+            <input class="form-control shadow-none rounded-end" type="text" value="{{guide.area}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+            <span class="input-group-text col-3">City</span>
+            <input class="form-control shadow-none rounded-end" type="text" value="{{guide.city}}" readonly><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Languages</span>
+          <input class="form-control shadow-none rounded-end" type="text" value="{{guide.languages}}" readonly><br><br>
+        </div><br>
+
+      <div class="input-group row">
+        <span class="input-group-text col-3">Price</span>
+        <input class="form-control shadow-none rounded-end" type="text" value="{{guide.price}}" readonly><br><br>
+      </div><br>
+
+        <div class="input-group row">
+            <span class="input-group-text col-3">Bio</span>
+            <textarea class="form-control shadow-none rounded-end" readonly>{{guide.bio}}</textarea><br><br>
+        </div><br>
+      </div>
+      <div class="col-md-6">
+        <h4 class="text-light">Password</h4><br>
+        <form method="post" action="/tourguide/tpassword/">{%csrf_token%}
+            <div class="input-group row">
+                <span class="input-group-text col-4 text-wrap">Old Password</span>
+                <input type="password" name="pass1" id="pass1" class="form-control p-2 shadow-none rounded-end" placeholder="Old Password" /><br>
+            </div><br>
+
+            <div class="input-group row">
+                <span class="input-group-text col-4 text-wrap">Enter new Password</span>
+                <input type="password" name="pass2" id="pass2" class="form-control p-2 shadow-none rounded-end" placeholder="Enter new Password" /><br>
+            </div><br>
+            
+            <div class="input-group row">
+                <span class="input-group-text col-4 text-wrap">Confirm Password</span>
+                <input type="password" name="pass3" id="pass3" class="form-control p-2 shadow-none rounded-end" placeholder="Confirm Password" /><br>
+            </div><br>
+            <p id="passError" class="text-danger"></p><br>
+            {% if error_message %}
+                <p class="alert alert-danger">Old password doesn't match</p>
+            {% endif %}
+          <button type="submit" name="password" id="password" class="col-3 btn btn-primary">Update</button>
+        </form><br>
+      </div>
+    </div>
+</div>
+  
+<!--Profile Update-->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <form method="post" action="/tourguide/tprofile/" class="modal-content">{% csrf_token %}
+
+      <div class="modal-header">
+        <h4 class="modal-title">{{guide.name}}'s Profile</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body container">
+        <div class="input-group row">
+          <span class="input-group-text col-3">Name</span>
+          <input class="form-control shadow-none rounded-end" type="text" name="name" value="{{guide.name}}"><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Mobile</span>
+          <input class="form-control shadow-none rounded-end" type="number" id="mobile" name="mobile" value="{{guide.mobile}}"><br><br>
+        </div>
+        <p id="mobile-error" class="text-danger"></p><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">E-mail</span>
+          <input class="form-control shadow-none rounded-end" type="text" name="email" id="email" value="{{guide.email}}"><br><br>
+        </div>
+        <p id="error-message" class="text-danger"></p><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Experience</span>
+          <input class="form-control shadow-none rounded-end" type="number" name="experience" value="{{guide.experience}}"><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Area</span>
+          <input class="form-control shadow-none rounded-end" type="text" name="area" value="{{guide.area}}"><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">City</span>
+          <select id="city" name="city" class="form-control shadow-none rounded-end" value="{{guide.city}}">
+              <option value="Mahabaleshwar">Mahabaleshwar</option>
+              <option value="Matheran">Matheran</option>
+              <option value="Lonavala">Lonavala</option>
+              <option value="Shegaon">Shegaon</option>
+          </select>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Languages</span>
+          <input class="form-control shadow-none rounded-end" type="text" name="languages" value="{{guide.languages}}"><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Price</span>
+          <input class="form-control shadow-none rounded-end" type="text" name="price" value="{{guide.price}}"><br><br>
+        </div><br>
+
+        <div class="input-group row">
+          <span class="input-group-text col-3">Bio</span>
+          <textarea class="form-control shadow-none rounded-end" name="bio" value="{{guide.bio}}">{{guide.bio}}</textarea><br><br>
+        </div><br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" name="admin" id="admin" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!--Update photo modal-->
+<div class="modal" id="photo">
+  <div class="modal-dialog">
+    <form method="post" action="/tourguide/tphoto/" class="modal-content" enctype="multipart/form-data">{% csrf_token %}
+      <div class="modal-header">
+        <h4 class="modal-title">{{guide.name}}'s Photo</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body container">
+        <div class="input-group row">
+          <span class="input-group-text col-3">Image</span>
+          <input class="form-control shadow-none rounded-end" type="file" name="img"><br><br>
+        </div><br>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" name="admin" id="admin" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+    var email = document.getElementById('email');
+      var mobile = document.getElementById('mobile');
+      var errorMsg = document.getElementById('error-message');
+      var mobileError = document.getElementById('mobile-error');
+      var submit = document.getElementById('admin');
+  
+      email.addEventListener('input', function() {
+        var value = email.value;
+        var atSymbol = value.indexOf('@');
+        var dotSymbol = value.indexOf('.');
+        var dotlast = value.lastIndexOf('.');
+        var spaceSymbol = value.indexOf(' ');
+  
+        if (
+          atSymbol !== -1 &&
+          atSymbol !== 0 &&
+          dotSymbol !== -1 &&
+          dotSymbol !== 0 &&
+          dotlast > atSymbol &&
+          value.length > dotlast+1 &&
+          spaceSymbol === -1
+        ) {
+          errorMsg.innerHTML = '';
+        } else {
+          errorMsg.innerHTML = 'Please enter a valid email address.';
+        }
+        validateSubmitButton();
+      });
+  
+      mobile.addEventListener('input', function() {
+        var mob = mobile.value;
+        if (mob.length === 10) {
+          mobileError.innerHTML = '';
+        } else {
+          mobileError.innerHTML = 'Please enter a valid 10-digit number.';
+        }
+        validateSubmitButton();
+      });
+  
+      function validateSubmitButton() {
+        // Enable the submit button only if both email and mobile are valid
+        submit.disabled = errorMsg.innerHTML !== '' || mobileError.innerHTML !== '';
+      }
+
+      
+      var pass2 = document.getElementById('pass2');
+      var pass3 = document.getElementById('pass3');
+      var passError = document.getElementById('passError');
+      var loginBtn = document.getElementById('password');
+
+      pass3.addEventListener('input', function () {
+        var password1 = pass2.value;
+        var password2 = pass3.value;
+        if (password1 == password2) {
+            passError.innerHTML = '';
+        } else {
+            passError.innerHTML = 'Password Missmatch';
+        }
+        validateSubmitBut();
+    });
+
+    function validateSubmitBut(){
+      loginBtn.disabled = passError.innerHTML!=''
+    }
+  
+{% endblock %}
