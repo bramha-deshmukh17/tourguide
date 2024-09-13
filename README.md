@@ -52,7 +52,7 @@ python manage.py createsuperuser
 # - Password (you'll be asked to confirm the password).
 
 # Once the superuser is created, go to:
-# http://127.0.0.1:8000/admin/
+# http://127.0.0.1:8000/database/
 # Log in with the username and password you used while creating the superuser.
 
 # In the DB folder, there is a copy of each table. Use the Import option available in the top-right corner of the website to import them.
