@@ -21,9 +21,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    #bramha
-    #bramhadeshmukh17@gmail.com
-    #qweRty@123
+    
     path("", views.index, name="index"),
    
     #customer section

@@ -1,0 +1,4 @@
+cid,name,email,mobile,password
+12,Test,qwerty@gmail.com,9922466109,"argon2$argon2id$v=19$m=102400,t=2,p=8$blc2V3dkUnNJVFc0SDk3NHJqZ0kxUQ$2/qc/lxppHyGUpEmtlxQIYQ2GqIoTY9IWIz1UZe21Dw"
+10,Ashish,ashish@gmail.com,4878787878,"argon2$argon2id$v=19$m=102400,t=2,p=8$SjJuMXFyYnRwSjhRRTRYZVBNY0EzMQ$VXepEyV4MxQLlhEqDCDs+QSWX+dJz8HtytMBo2dCs+U"
+1,Bramha,test@gmail.com,9922466109,"argon2$argon2id$v=19$m=102400,t=2,p=8$MDEzOThzdW5SYTl1aW1STzNjQnA0eQ$UTv8p4vRF1FvqqE/WwS1qAm+WXMEd8o7lfCx2ZeJn1Y"
