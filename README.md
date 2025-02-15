@@ -31,18 +31,11 @@ cd tourguide
 ```
 Now, install the required Python packages:
 ```bash
-pip install pillow django-import-export Django psycopg2 djangorestframework
+pip install pillow django-import-export Django psycopg2 djangorestframework argon2_cffi
 ```
 
-## 📌 Step 5: Run the Django Development Server  
-```bash
-python manage.py runserver
-```
-🔹 To stop the server, press **Ctrl + C**.
 
----
-
-## 🗄️ PostgreSQL Setup
+## 📌 Step 5: PostgreSQL Setup
 
 ### ➤ Install PostgreSQL  
 - While installing, set the **password** to: `admin`
@@ -60,6 +53,14 @@ python manage.py runserver
 2. **Format**: `Directory`  
 3. **File Location**: Inside the `db` folder  
 4. Click **Restore** to complete the process
+
+---
+
+## 📌 Step 6: Run the Django Development Server  
+```bash
+python manage.py runserver
+```
+🔹 To stop the server, press **Ctrl + C**.
 
 ---
 
@@ -121,5 +122,3 @@ deactivate
 ```
 
 ---
-
-This guide should help you set up your Django-based website with PostgreSQL as your database.
