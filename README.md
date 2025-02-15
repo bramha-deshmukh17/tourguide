@@ -21,7 +21,7 @@ source bin/activate
 
 ## 📌 Step 3: Clone the Git Repository  
 ```bash
-git clone <repository-url>
+git clone https://github.com/bramha-deshmukh17/tourguide 
 ```
 
 ## 📌 Step 4: Install Dependencies  
