@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Details {% endblock %}
+    {% block css %}
+
+      
+    /* card*/
+    .card {
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+       
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 5/3;
+    }
+
+    .card-block {
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    .card-title a{
+        text-decoration:none;
+        padding:5px;
+        color: #000 !important;
+    }
+    .card-title:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .custom-responsive-text {
+            font-size: 14px; /* Adjust font size for small screens */
+        }
+    }
+    @media (min-width: 768px) {
+        .custom-responsive-text {
+            font-size: 20px; /* Adjust font size for medium screens */
+        }
+    }
+   
+    .book,.book:hover{
+        background-color: #fff;
+        color:#000;
+        width:8rem;
+        margin-left:1%;
+        font-weight:500;
+    }
+
+    {% endblock %}
+    {% block search%}style='display:none'{%endblock%}
+    {% block searchbtn%}style='display:none'{%endblock%}
+
+    {% block action%} action='/tourguide/search/'{%endblock%}
+
+    {% block body %}
+    
+    <div class="container">
+        <div class="row text-light p-3">
+            {%for data in data%}
+            <div> <h3 style="display: inline;">{{data.name}}</h3>&nbsp; &#9733; {{data.rating}}</div>
+            <p><i class="fa-solid fa-location-dot"></i>&nbsp;{{data.area}}, {{data.city}}</p>
+            <img class="container ms-0"  style="width:100%;max-width:30%;max-height:25%;" src="/media/{{data.img}}" /><br><br>
+            <div class="pt-5 pb-2">
+                <h3>Bio:</h3>
+                <p class="text-justify">{{data.bio}}</p>
+            </div>
+            <p><b>Mobile:</b> {{data.mobile}}</p>
+            <p><b>Email:</b>: {{data.email}}</p>
+            <p><b>Languages</b>: {{data.languages}}</p>
+            <p><b>Experience</b>: {{data.experience}} year(s)</p>
+            <p><b>Price</b>: {{data.price}}₹/day</p>
+            <a href="/tourguide/book/?id={{data.tid}}" class="btn book">Book Now</a>
+            {%endfor%}
+        </div>
+    </div>
+
+    {% if nearby%}
+    <div class="container">
+        <div class="row p-3">
+            <h2 class="text-light">Other Guides:</h2>
+            {% for i in nearby %}
+            <div class="col-sm-4">
+                <div class="card card-block">
+                    <img src="/media/{{i.img}}" alt="Nature" class="img-fluid" />
+                    <div class="row">
+                        <h4 class="card-title text-truncate pt-3"><a href="/tourguide/details/?id={{i.tid}}" style="margin-left:0;padding-left:0;">{{i.name}}</a></h4><br>
+                        <p class="card-title text-truncate"> &#9733; {{i.rating}} </p>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% endblock %}

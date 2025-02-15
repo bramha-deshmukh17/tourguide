@@ -1,0 +1,171 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}Customer Booking {% endblock %}
+{% block css %}
+
+.tooltip-inner {
+    white-space:pre;
+    max-width:none;
+}
+      
+{% endblock %}
+{% block search%}style='display:none'{%endblock%}
+{% block searchbtn%}style='display:none'{%endblock%}
+
+{% block body %}
+
+<div class="container pt-5">
+    <div class="row text-light pb-5">
+        <h1>Active Bookings:</h1>
+        {%if active%}
+        <table class="table table-sm table-hover table-responsive-md table-bordered text-center mt-5 mb-5" style="vertical-align:middle;">
+              <tr><th>Guide Name</th><th>Venue</th><th>Pickup</th><th>Price</th><th>Date</th><th>Time</th><th>Payment</th><th>Action</th></tr>
+              {% for i in active%}
+              <tr><td>
+                <button type="button" class="btn" data-bs-toggle="tooltip"
+                {% for guide in guide %}
+                  {% if guide.tid == i.tid_id %}
+                  title="Mobile: {{guide.mobile}}
+Email: {{guide.email}}"><a href="/tourguide/details/?id={{guide.tid}}" style="color:#000;text-decoration:none;">{{guide.name}}</a>    {% endif %}{% endfor %}
+                  </button>
+                  </td>
+                  <td>{{i.venu}}</td>
+                  <td>{{i.pickup}}</td>
+                  <td>{{i.price}}</td>
+                  <td>{{i.date}}</td>
+                  <td>{{i.time}}</td>
+                  <td>Cash</td>
+                  <td><a class="btn btn-danger" href="/cacelbooking/?bid={{i.bid}}">Cancel</a></td>
+              </tr> {% endfor %}
+        </table>
+       
+      {% else %}
+          <h4 class="ps-5 text-light">No Bookings found</h4>
+      {%endif%}
+        
+    </div>
+    <div class="row text-light">
+      <h1>Previous Bookings:</h1>
+      {%if inactive%}
+        <table class="table table-sm table-hover table-responsive-md table-bordered text-center mt-5 mb-5" style="vertical-align:middle;">
+              <tr><th>Guide Name</th><th>Venue</th><th>Pickup</th><th>Price</th><th>Date</th><th>Time</th><th>Payment</th><th>Feedback</th></tr>
+              {% for i in inactive%}
+              <tr><td>
+                <button type="button" class="btn" data-bs-toggle="tooltip"
+                {% for guide in guide %}
+                  {% if guide.tid == i.tid_id %}
+                  title="Mobile: {{guide.mobile}}
+Email: {{guide.email}}"><a href="/tourguide/details/?id={{guide.tid}}" style="color:#000;text-decoration:none;">{{guide.name}}</a>{% endif %}{% endfor %}
+                  </button>
+                  </td>
+                  <td>{{i.venu}}</td>
+                  <td>{{i.pickup}}</td>
+                  <td>{{i.price}}</td>
+                  <td>{{i.date}}</td>
+                  <td>{{i.time}}</td>
+                  <td>Cash</td>
+                  <td> 
+                    <!--Give First feedback-->
+                    {% if i.feedback|lower ==  'active'  %}
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.bid}}">
+                        Give Rating &#9734;
+                      </button>
+                      <div class="modal fade" id="exampleModal{{i.bid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form method="post" action="/rate/" class="modal-dialog">{% csrf_token %}
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Give Feedback</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="hidden" value={{i.bid}} name="id" reuired>
+                              <div class="input-group row">
+                                <span class="input-group-text col-3">Rating</span>
+                                <select id="rating" name="rating" class="form-control shadow-none rounded-end">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                  </select>
+                            </div><br>
+
+                            <div class="input-group row">
+                              <span class="input-group-text col-3">Comment</span>
+                              <textarea class="form-control shadow-none rounded-end" name="comment" required></textarea><br><br>
+                          </div><br>
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      
+                    {% else %}
+                      <!--View Last feedback-->
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.bid}}">
+                        View &#9734;
+                      </button>
+                      <div class="modal fade" id="exampleModal{{i.bid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form method="post" action="/rate/" class="modal-dialog">{% csrf_token %}
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Give Feedback</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="hidden" value={{i.bid}} name="id" reuired>
+                              <div class="input-group row">
+                                <span class="input-group-text col-3">Rating</span>
+                                <select id="rating" name="rating" class="form-control shadow-none rounded-end">
+                                    <option value="{{i.rating}}" selected>{{i.rating}}</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                  </select>
+                            </div><br>
+
+                            <div class="input-group row">
+                              <span class="input-group-text col-3">Comment</span>
+                              <textarea class="form-control shadow-none rounded-end" name="comment" required>{{i.comment}}</textarea><br><br>
+                          </div><br>
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    {%endif%}
+                  </td>
+              </tr> {% endfor %}
+        </table>
+       
+      {% else %}
+          <h4 class="ps-5 text-light">No Bookings found</h4>
+      {%endif%}
+      
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+{% endblock %}
+
+
+
+

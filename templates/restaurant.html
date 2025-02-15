@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Restaurants {% endblock %}
+    {% block css %}
+
+        /* card*/
+        .card {
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+           
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            
+        }
+
+        .card-block {
+            padding: 15px;
+            text-decoration: none;
+        }
+
+        .card-title a{
+            text-decoration:none;
+            padding:5px;
+            color: #000 !important;
+        }
+        .card-title:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    {% endblock %}
+
+
+    {% block action%} action='/restaurants/search/'{%endblock%}
+
+    {% block body %}
+    {% if not error %}
+    <div class="container">
+        <div class="row">
+            {% for i in data %}
+            <div class="col-sm-4">
+                <div class="card card-block">
+                    <img src="/media/{{i.img}}" alt="Nature" class="img-fluid" />
+                    <h4 class="card-title text-truncate pt-3"><a href="/restaurants/details/?id={{i.rid}}" style="margin-left:0;padding-left:0;">{{i.name}}</a></h4>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}<br><br>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="row text-light p-5 text-center">
+            <h1 class="p-5 alert alert-danger">No corresponding data found try using exact phrase..!</h1>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endblock %}

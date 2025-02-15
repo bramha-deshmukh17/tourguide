@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TourGuide Home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/a0a54ad092.js" crossorigin="anonymous"></script>
+    <style> 
+     
+      section a {
+        text-decoration: none;
+      }
+  
+      section a:hover {
+        text-decoration: underline;
+      }
+      
+      .shadow-none:active{
+        outline: 1px solid #000;
+      }
+
+      ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px !important; /* width & height of the scrollbar */
+      }
+      
+      ::-webkit-scrollbar-track {
+        background-color: #333; /* color of the track */
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background-color: #666; /* color of the thumb */
+        border-radius: 5px; /* roundness of the thumb */
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #888; /* color of the thumb on hover */
+      }
+
+      .dropdown-menu{
+        min-width: 120px;
+        text-align: center;
+      }
+
+      .bg-img {
+        background-image: url("{% static './img/bg3.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        width: 100%; /* Or any other width you desire */
+        height: auto;
+      }
+  
+      section a {
+        text-decoration: none;
+      }
+  
+      section a:hover {
+        text-decoration: underline;
+      }
+  
+      img{
+        aspect-ratio: 3/2;
+      }
+  
+      .image-container {
+        position: relative;
+      }
+  
+      .image {
+        opacity: 1;
+        display: block;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        border-radius: 10px 10px 0 0;
+      }
+  
+      .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        padding: 0.5em;
+      }
+  
+      .image-container:hover .image {
+        opacity: 0.3;
+      }
+  
+      .image-container:hover .middle {
+        opacity: 0.7;
+      }
+  
+      .text,  .text:hover{
+        background-color: #fff;
+        color: #000;
+        padding: 1rem 2rem;
+        border-radius: 10px 0 0 10px;
+        cursor:default;
+      }
+    
+      .middle a{
+        color: #fff;
+        text-decoration: none;
+      }
+      .middle a:hover{
+        text-decoration: underline;
+      }
+      
+      .status,.status:hover{
+        border-radius:0 10px 10px 0;
+        background-color: black;
+        color:white;
+        padding: 1rem 2rem
+      }
+      .tooltip-inner {
+        white-space:pre;
+        max-width:none;
+    }
+    </style>
+</head>
+
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark position-sticky sticky-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/tourguide/home/">TourGuide</a>
+            <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tourguide/home/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tourguide/contact/">Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex me-4">
+                    <div class="input-group">
+                        <div class="dropdown me-3">
+                          <button class="btn btn-light text-dark rounded" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i> &nbsp;{{user_name}}</button> 
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item fw-bold" href="/tourguide/profile/">Profile</a></li>
+                            <li><a class="dropdown-item fw-bold" href="/logout/">Logout</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container bg-dark text-light">
+      <div class="row text-light">
+        <div class="text-start"></div>
+        <div class="row pt-5 pb-5">
+          <div class="col-sm-6 pt-2" style="float:left;"><h2 class="text-start">Overall Rating: {{guide.rating}} &#9734;</h2></div>
+          <div class="col-sm-6">
+            <div class="text-end" style="float:right;">
+              <label class="fw-bold btn text">Status: &nbsp;</label>
+              <a href="/status/?status1={% if guide.status|lower == 'active' %}inactive{% elif guide.status|lower == 'inactive' %}active{% endif %}" id="status1" class="btn fw-bold status">{{guide.status|title}}</a>
+            </div><br>
+          </div>
+        </div>
+        <h1>Active Bookings</h1>
+        {%if data%}
+          <table class="table table-sm table-hover table-responsive-md table-bordered text-center m-3">
+                <tr><th>Name</th><th>Venue</th><th>Pickup</th><th>Date</th><th>Time</th><th>Payment</th><th>Action</th></tr>
+                <tr><td>{{data.cid}}</td><td>{{data.venu}}</td><td>{{data.pickup}}</td><td>{{data.date}}</td><td>{{data.time}}</td><td>Cash</td><td><a class="btn btn-primary" href="/tourguide/book/status/?bid={{data.bid}}">Complete</a></td></tr>
+          </table>
+        {% else %}
+          <h4 class="pb-5 ps-5">No Booking available</h4>
+        {% endif %}
+      </div>
+      <div class="row text-light">
+        <h1>Previous Bookings:</h1>
+        {%if inactive%}
+          <table class="table table-sm table-hover table-responsive-md table-bordered text-center m-3" style="vertical-align:middle;">
+                <tr><th>Name</th><th>Venue</th><th>Pickup</th><th>Price</th><th>Date</th><th>Time</th><th>Payment</th><th>Feedback</th></tr>
+                {% for i in inactive%}
+                <tr><td>{{i.cid}}</td>
+                    <td>{{i.venu}}</td>
+                    <td>{{i.pickup}}</td>
+                    <td>{{i.price}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.time}}</td>
+                    <td>Cash</td>
+                    <td> 
+                      <!--Give First feedback-->
+                      {% if i.feedback|lower ==  'active'  %}
+                        <button type="button" class="btn btn-primary">
+                          Pending Review
+                        </button>
+              
+                      {% else %}
+                        <!--View Last feedback-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{i.bid}}">
+                          View &#9734;
+                        </button>
+                        <div class="modal fade" id="exampleModal{{i.bid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <form class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Give Feedback</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+                              <div class="modal-body">
+                                <div class="input-group row">
+                                  <span class="input-group-text col-3">Rating</span>
+                                  <input class="form-control shadow-none rounded-end" type="text"  value="{{i.rating}}" readonly><br><br>
+                              </div><br>
+  
+                              <div class="input-group row">
+                                <span class="input-group-text col-3">Comment</span>
+                                <textarea class="form-control shadow-none rounded-end" readonly>{{i.comment}}</textarea><br><br>
+                            </div><br>
+  
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      {%endif%}
+                    </td>
+                </tr> {% endfor %}
+          </table>
+         
+        {% else %}
+            <h4 class="ps-5 text-light">No Bookings found</h4>
+        {%endif%}
+        
+    </div>
+  </div>
+
+    
+    <footer class="bg-dark text-center  container-fluid text-white p-5">
+        <div class="container p-4">
+          <section class="mt-5">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/bramha.deshmukh.58"
+              target="_blank" role="button"><i class="fa fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/deshmukh_bramha" target="_blank"
+              role="button"><i class="fa fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/bramha_deshmukh_17?r=nametag"
+              target="_blank" role="button"><i class="fa fa-instagram"></i></a>
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/bramha-deshmukh-a97339271/"
+              target="_blank" role="button"><i class="fa fa-linkedin"></i></a>
+          </section>
+          <br><br><br>
+          <section class="text-light text-center h4 mb-0">
+    
+            © 2024 Copyright:
+            TourGuide.com
+    
+          </section>
+        </div>
+      </footer>
+    
+    
+    
+<script>
+
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+    {% if guide.status == 'Active' %}
+      let status=document.getElementById('status1');
+      status.style.backgroundColor='green'
+    {% elif guide.status == 'active'%}
+      let status=document.getElementById('status1');
+      status.style.backgroundColor='green'
+    {% else %}
+      let status=document.getElementById('status1');
+      status.style.backgroundColor='red'
+    {% endif %}
+    
+</script>
+</body>
+</html>
+
+
+

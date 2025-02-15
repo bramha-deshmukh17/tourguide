@@ -1,0 +1,3 @@
+tid,name,email,mobile,password,img,bio,languages,experience,city,area,price,status,rating
+3,Sachin,sachin@gmail.com,8787878784,"argon2$argon2id$v=19$m=102400,t=2,p=8$V0JXQTQ3Q1FTckFLU3dzV2dKNjhITg$iJ3TdETbsb9WuMOJPvPicnkzDN7Yc1LqbnL/Ut1Iq+c",guide/download.jpeg,xvd,Hindi,1,mahabaleshwar,mahabaleshwar,1000,active,4.0
+1,Raj,test@gmail.com,4787878878,"argon2$argon2id$v=19$m=102400,t=2,p=8$QVlhQW1iYkcwbnpPYWVBeVVuT2h4dw$fMNzZXFXCOgwY9FRHS+ThuIaHls4YVrFgPBnDUCQDik",guide/pj.jpg,zsht hw efghjw yf g,"Hindi, Marathi, English",1,mahabaleshwar,Mahabaleshwar,1000,active,3.5
