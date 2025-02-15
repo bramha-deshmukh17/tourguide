@@ -1,83 +1,125 @@
-# Django-Based Website Setup Guide
+# 🏗️ Django-Based Website Setup Guide
 
-# Navigate to your project root directory in the command prompt
-# (Make sure you have Python installed).
+## 📌 Step 1: Navigate to Your Project Root Directory  
+Open the command prompt and go to the directory where you want to set up the project.
 
-# Create a Virtual Environment
-```bash python -m venv tourguide ```
+## 📌 Step 2: Create and Activate a Virtual Environment  
+```bash
+python -m venv tourguide
+cd tourguide
+```
 
-# Navigate to the Directory
-```bash cd tourguide```
+### ➤ Windows:
+```bash
+Scripts\activate
+```
 
-# Clone git repository
-```bash git clone```
+### ➤ macOS/Linux:
+```bash
+source bin/activate
+```
 
-# Activate the Virtual Environment
-# On Windows:
-```bash Scripts\activate ```
-# On macOS/Linux:
-```bash source bin/activate```
+## 📌 Step 3: Clone the Git Repository  
+```bash
+git clone <repository-url>
+```
 
-# Navigate to the `manage.py` File Directory
-```bash cd tourguide```
+## 📌 Step 4: Install Dependencies  
+Navigate to the project directory (where `manage.py` is located):
+```bash
+cd tourguide
+```
+Now, install the required Python packages:
+```bash
+pip install pillow django-import-export Django psycopg2 djangorestframework
+```
 
-# List and Install Dependencies
-```bash pip install pillow django-import-export Django psycopg2 djangorestframework```
+## 📌 Step 5: Run the Django Development Server  
+```bash
+python manage.py runserver
+```
+🔹 To stop the server, press **Ctrl + C**.
 
-# Run the Django Development Server
-```bash py manage.py runserver```
+---
 
+## 🗄️ PostgreSQL Setup
 
-# To stop the server, press Ctrl + C
+### ➤ Install PostgreSQL  
+- While installing, set the **password** to: `admin`
 
-# After setting everything up, copy and paste the necessary files into the project.
+### ➤ Create a New PostgreSQL User  
+- **Username**: `tourguide`  
+- **Password**: `admin`
 
-# Setup PostgreSQL
-# - Install PostgreSQl (while installing Password - admin)
-# - Create new User: tourguide password - admin
-# - Create new Db: python and assign ownership to tourguide
-# - Right click on newly created DB (python) select restore 
-#   1. Format - Directory
-#   2. File is under db folder
-# - Now click restore to restore the db
+### ➤ Create a New Database  
+- **Database Name**: `python`  
+- Assign ownership to: `tourguide`
 
-# Setup the `settings.py` File for PostgreSQL Database(option if db created with given data):
-# - Update the `settings.py` file with your database credentials to use PostgreSQL.
+### ➤ Restore Database  
+1. Right-click on the **python** database and select **Restore**  
+2. **Format**: `Directory`  
+3. **File Location**: Inside the `db` folder  
+4. Click **Restore** to complete the process
 
-# Create a Superuser to Access the Database:
-# To create a superuser, run:
-```bash python manage.py createsuperuser```
-# You will be prompted to enter the following details:
-# - Username
-# - Email address
-# - Password (you'll be asked to confirm the password).
+---
 
-# Once the superuser is created, go to:
-# http://127.0.0.1:8000/database/
-# Log in with the username and password you used while creating the superuser.
+## 🛠️ Update `settings.py` for PostgreSQL  
+Modify your **`settings.py`** file to use PostgreSQL with the newly created database.
 
-# In the DB folder, there is a copy of each table. Use the Import option available in the top-right corner of the website to import them.
+---
 
-# Running the Django Server Again:
-# After setting everything up, run:
-```bash python manage.py runserver```
+## 👤 Create a Superuser  
+Run the following command:
+```bash
+python manage.py createsuperuser
+```
+🔹 You will be prompted to enter:
+- **Username**
+- **Email address**
+- **Password** (you'll be asked to confirm it)
 
-# Visit:
-# http://127.0.0.1:8000/
+Once the superuser is created, visit:  
+**http://127.0.0.1:8000/database/**  
+Log in using the credentials you set.
 
-# Credentials:
-# 1. Admin
-#    - Username: admin
-#    - Password: admin
+---
 
-# 2. Guide
-#    - Username: test@gmail.com
-#    - Password: test
+## 📥 Import Tables into the Database  
+In the `DB` folder, you will find a copy of each table.  
+Use the **Import** option (top-right corner of the website) to upload them.
 
-# 3. Customer
-#    - Username: test@gmail.com
-#    - Password: test
+---
 
+## 🚀 Running the Django Server Again  
+```bash
+python manage.py runserver
+```
+Visit:  
+**http://127.0.0.1:8000/**
 
-# To deactivate the virtual environment
-```bash deactivate```
+---
+
+## 🔑 Default Credentials  
+
+### **Admin**  
+- **Username**: `admin`  
+- **Password**: `admin`
+
+### **Guide**  
+- **Username**: `test@gmail.com`  
+- **Password**: `test`
+
+### **Customer**  
+- **Username**: `test@gmail.com`  
+- **Password**: `test`
+
+---
+
+## ❌ Deactivate the Virtual Environment  
+```bash
+deactivate
+```
+
+---
+
+This guide should help you set up your Django-based website with PostgreSQL as your database.
