@@ -85,21 +85,6 @@ Log in using the credentials you set.
 
 ---
 
-## 📥 Import Tables into the Database  
-In the `DB` folder, you will find a copy of each table.  
-Use the **Import** option (top-right corner of the website) to upload them.
-
----
-
-## 🚀 Running the Django Server Again  
-```bash
-python manage.py runserver
-```
-Visit:  
-**http://127.0.0.1:8000/**
-
----
-
 ## 🔑 Default Credentials  
 
 ### **Admin**  
