@@ -38,11 +38,11 @@ pip install pillow django-import-export Django psycopg2 djangorestframework argo
 ## 📌 Step 5: PostgreSQL Setup
 
 ### ➤ Install PostgreSQL  
-- While installing, set the **password** to: `admin`
+- While installing, set the **password**
 
 ### ➤ Create a New PostgreSQL User  
 - **Username**: `tourguide`  
-- **Password**: `admin`
+- **Password**: `YOUR_PASSWORD`
 
 ### ➤ Create a New Database  
 - **Database Name**: `python`  
