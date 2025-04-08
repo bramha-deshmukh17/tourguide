@@ -81,7 +81,6 @@ python manage.py createsuperuser
 
 Once the superuser is created, visit:  
 
-**http://127.0.0.1:8000/database/**  
 ```bash
 http://127.0.0.1:8000/database/
 ```
