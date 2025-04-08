@@ -80,7 +80,11 @@ python manage.py createsuperuser
 - **Password** (you'll be asked to confirm it)
 
 Once the superuser is created, visit:  
+
 **http://127.0.0.1:8000/database/**  
+```bash
+http://127.0.0.1:8000/database/
+```
 Log in using the credentials you set.
 
 ---
