@@ -1,110 +1,179 @@
-# 🏗️ Django-Based Website Setup Guide
+# 🏗️ Django-Based Tour Guide Website
 
-## 📌 Step 1: Navigate to Your Project Root Directory  
-Open the command prompt and go to the directory where you want to set up the project.
+A modern and responsive web application for managing tour guides, customers, and bookings, built with **Django** and **PostgreSQL**.
 
-## 📌 Step 2: Create and Activate a Virtual Environment  
+---
+
+## Table of Contents
+
+- [🚀 Live Demo](#live-demo)
+- [📂 GitHub Repository](#github-repository)
+- [🛠️ Tech Stack](#tech-stack)
+- [✨ Features](#features)
+- [👤 Author](#author)
+- [⚙️ Installation and Setup](#installation-and-setup)
+- [🖥️ Usage](#usage)
+- [⚙️ Deployment](#deployment)
+- [🌐 References](#references)
+- [📬 Contact](#contact)
+
+---
+
+## <a id="live-demo"></a>🚀 Live Demo
+
+👉 _Demo link coming soon !_
+
+---
+
+## <a id="github-repository"></a>📂 GitHub Repository
+
+🔗 [View Source Code](https://github.com/bramha-deshmukh17/tourguide)
+
+---
+
+## <a id="tech-stack"></a>🛠️ Tech Stack
+
+- **Backend**: Django, Django REST Framework
+- **Database**: PostgreSQL
+- **Authentication**: Django Auth, Argon2
+- **File Storage**: Pillow (for image uploads)
+- **Import/Export**: django-import-export
+
+---
+
+## <a id="features"></a>✨ Features
+
+- 🗺️ Manage tours, guides, and customers
+- 🔒 Secure authentication for admin, guides, and customers
+- 📦 Import/export data via admin panel
+- 🖼️ Image upload support
+- 📊 REST API endpoints for integration
+
+---
+
+## <a id="author"></a>👤 Author
+
+- **Bramha Deshmukh**
+- [GitHub](https://github.com/bramha-deshmukh17)
+
+---
+
+## <a id="installation-and-setup"></a>⚙️ Installation and Setup
+
+### 1. Clone the Repository
+
 ```bash
-python -m venv tourguide
+git clone https://github.com/bramha-deshmukh17/tourguide
 cd tourguide
 ```
 
-### ➤ Windows:
+### 2. Create and Activate a Virtual Environment
+
 ```bash
-Scripts\activate
+python -m venv venv
 ```
 
-### ➤ macOS/Linux:
+#### ➤ Windows:
 ```bash
-source bin/activate
+venv\Scripts\activate
 ```
 
-## 📌 Step 3: Clone the Git Repository  
+#### ➤ macOS/Linux:
 ```bash
-git clone https://github.com/bramha-deshmukh17/tourguide 
+source venv/bin/activate
 ```
 
-## 📌 Step 4: Install Dependencies  
-Navigate to the project directory (where `manage.py` is located):
-```bash
-cd tourguide
-```
-Now, install the required Python packages:
+### 3. Install Dependencies
+
 ```bash
 pip install pillow django-import-export Django psycopg2 djangorestframework argon2_cffi
 ```
 
+### 4. PostgreSQL Setup
 
-## 📌 Step 5: PostgreSQL Setup
+- Install PostgreSQL and set the **password** to: `admin`
+- Create a user:  
+  - **Username**: `tourguide`  
+  - **Password**: `admin`
+- Create a database:  
+  - **Database Name**: `python`  
+  - Assign ownership to: `tourguide`
+- Restore the database:  
+  - Right-click on the **python** database → **Restore**  
+  - **Format**: `Directory`  
+  - **File Location**: Inside the `db` folder  
+  - Click **Restore**
 
-### ➤ Install PostgreSQL  
-- While installing, set the **password**
+### 5. Update `settings.py` for PostgreSQL
 
-### ➤ Create a New PostgreSQL User  
-- **Username**: `tourguide`  
-- **Password**: `YOUR_PASSWORD`
-
-### ➤ Create a New Database  
-- **Database Name**: `python`  
-- Assign ownership to: `tourguide`
-
-### ➤ Restore Database  
-1. Right-click on the **python** database and select **Restore**  
-2. **Format**: `Directory`  
-3. **File Location**: Inside the `db` folder  
-4. Click **Restore** to complete the process
+Edit your `settings.py` to use PostgreSQL with the above credentials.
 
 ---
 
-## 📌 Step 6: Run the Django Development Server  
+## <a id="usage"></a>🖥️ Usage
+
+### 1. Run the Django Development Server
+
 ```bash
 python manage.py runserver
 ```
-🔹 To stop the server, press **Ctrl + C**.
+Visit: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
----
+### 2. Create a Superuser
 
-## 🛠️ Update `settings.py` for PostgreSQL  
-Modify your **`settings.py`** file to use PostgreSQL with the newly created database.
-
----
-
-## 👤 Create a Superuser  
-Run the following command:
 ```bash
 python manage.py createsuperuser
 ```
-🔹 You will be prompted to enter:
-- **Username**
-- **Email address**
-- **Password** (you'll be asked to confirm it)
+Follow the prompts to set username, email, and password.
 
-Once the superuser is created, visit:  
+### 3. Log in to the Admin Panel
 
-```bash
-http://127.0.0.1:8000/database/
-```
-Log in using the credentials you set.
+Visit: [http://127.0.0.1:8000/database/](http://127.0.0.1:8000/database/)
 
 ---
 
-## 🔑 Default Credentials  
+## <a id="deployment"></a>⚙️ Deployment
 
-### **Admin**  
-- **Username**: `admin`  
+- Use `python manage.py collectstatic` for static files.
+- Configure your production server (e.g., Gunicorn, Nginx, Heroku, etc.).
+- Set environment variables for production.
+
+---
+
+## <a id="references"></a>🌐 References
+
+- [Django](https://www.djangoproject.com/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [django-import-export](https://django-import-export.readthedocs.io/)
+- [Pillow](https://python-pillow.org/)
+
+---
+
+## <a id="contact"></a>📬 Contact
+
+For any inquiries or feedback, please contact me at [bramha.deshmukh17@gmail.com](mailto:bramha.deshmukh17@gmail.com).
+
+---
+
+## 🔑 Default Credentials
+
+### **Admin**
+- **Username**: `admin`
 - **Password**: `admin`
 
-### **Guide**  
-- **Username**: `test@gmail.com`  
+### **Guide**
+- **Username**: `test@gmail.com`
 - **Password**: `test`
 
-### **Customer**  
-- **Username**: `test@gmail.com`  
+### **Customer**
+- **Username**: `test@gmail.com`
 - **Password**: `test`
 
 ---
 
-## ❌ Deactivate the Virtual Environment  
+## ❌ Deactivate the Virtual Environment
+
 ```bash
 deactivate
 ```
